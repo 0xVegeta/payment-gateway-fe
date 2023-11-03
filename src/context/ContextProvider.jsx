@@ -5,26 +5,39 @@ import { useNavigate } from "react-router-dom";
 const Context = createContext();
 
 const ContextProvider = ({ children }) => {
-  const [organisation, setOrganisation] = useState();
-  const navigate = useNavigate();
+	const [organisation, setOrganisation] = useState();
+	const [sessionData, setSessionData] = useState();
+	const [amount, setAmount] = useState("");
+	const navigate = useNavigate();
 
-  useEffect(() => {
-    const orgInfo = JSON.parse(localStorage.getItem("orgInfo"));
-    setOrganisation(orgInfo);
-    
+	useEffect(() => {
+		const orgInfo = JSON.parse(localStorage.getItem("orgInfo"));
+		setOrganisation(orgInfo);
 
-    if (!orgInfo) {
-      navigate("/signin");
-    }
-  }, [navigate]);
-  return (
-    <Context.Provider value={{ organisation, setOrganisation }}>
-      {children}
-    </Context.Provider>
-  );
+		const session = JSON.parse(localStorage.getItem("session"));
+		setSessionData(session);
+
+		if (!orgInfo) {
+			navigate("/signin");
+		}
+	}, [navigate]);
+	return (
+		<Context.Provider
+			value={{
+				organisation,
+				sessionData,
+				setOrganisation,
+				setSessionData,
+				amount,
+				setAmount,
+			}}
+		>
+			{children}
+		</Context.Provider>
+	);
 };
 
 export const OrgState = () => {
-  return useContext(Context);
+	return useContext(Context);
 };
 export default ContextProvider;

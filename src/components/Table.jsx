@@ -1,156 +1,119 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { OrgState } from "../context/ContextProvider";
 
-function Table({ allWalletTransactions }) {
-  return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 w-4/6 mx-auto bg-[#eee] ">
-      <table className="w-full text-sm text-left text-[#f25a55] ">
-        <thead className="text-xs text-white uppercase bg-[#000000] ">
-          <tr className="p-2">
-            <th scope="col" className="px-6 py-3">
-              Sl. No.
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Transaction ID
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Payee Org ID
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Payee Wallet ID
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Amount
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Type
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* {allWalletTransactions &&
-            allWalletTransactions.map((txn) => (
-              <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e] ">
-                <td className="px-6 py-4">1</td>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                 {txn.TransactionTraceId}
-                </th>
-                <td className="px-6 py-4">{txn.counterParty}</td>
-                <td className="px-6 py-4">{txn.code}</td>
-                <td className="px-6 py-4">{txn.totalAmount}</td>
-                <td className="px-6 py-4">{txn.type}</td>
-              </tr>
-            ))} */}
-          <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e] ">
-            <td className="px-6 py-4">1</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$2999</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-          <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e]">
-            <td className="px-6 py-4">2</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$1999</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-          <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e]">
-            <td className="px-6 py-4">3</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$1999</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-          <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e]">
-            <td className="px-6 py-4">4</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$1999</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-          <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e]">
-            <td className="px-6 py-4">5</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$1999</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-          <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e]">
-            <td className="px-6 py-4">6</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$1999</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-          <tr className="bg-[#eee] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#31325a1e]">
-            <td className="px-6 py-4">7</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$1999</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-          <tr className="bg-[#eee] dark:bg-gray-800 hover:bg-[#31325a1e]">
-            <td className="px-6 py-4">8</td>
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              AND764
-            </th>
-            <td className="px-6 py-4">FDG345</td>
-            <td className="px-6 py-4">JDF485</td>
-            <td className="px-6 py-4">$99</td>
-            <td className="px-6 py-4">Credit</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
+function Table({ currWallet }) {
+	const [allTransactions, setAllTransactions] = useState();
+	const { organisation } = OrgState();
+
+	const getAllTransactions = () => {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${organisation.token}`,
+			},
+		};
+
+		if (currWallet === "All") {
+			axios
+				.post(
+					"/api/v1/txn/transaction",
+					{
+						allTransactions: true,
+					},
+					config
+				)
+				.then((response) => {
+					setAllTransactions(response.data.transactions);
+				})
+				.catch((err) => console.log(err));
+		} else {
+			axios
+				.post(
+					"/api/v1/txn/transaction",
+					{
+						walletCode: currWallet,
+					},
+					config
+				)
+				.then((response) => {
+					setAllTransactions(response.data.transactions);
+				})
+				.catch((err) => console.log(err));
+		}
+	};
+
+	useEffect(() => {
+		getAllTransactions();
+	}, [organisation, currWallet]);
+
+	return (
+		<div className=" mt-4 mb-8 w-5/6 mx-auto  grow h-64 overflow-y-auto">
+			<table className="w-full text-sm text-left text-[#50472D] border border-[#AC9D57]  ">
+				<thead className="text-xs rounded-sm text-white uppercase border border-[#333333] bg-[#333333] ">
+					<tr className="p-2">
+						<th scope="col" className="px-6 py-3">
+							Sl. No.
+						</th>
+						<th scope="col" className="px-6 py-3">
+							Transaction ID
+						</th>
+						<th scope="col" className="px-6 py-3">
+							Payee Org ID
+						</th>
+						<th scope="col" className="px-6 py-3">
+							Payee Wallet ID
+						</th>
+						<th scope="col" className="px-6 py-3">
+							Amount
+						</th>
+						<th scope="col" className="px-6 py-3">
+							Type
+						</th>
+					</tr>
+				</thead>
+
+				<tbody className=" overflow-y-auto">
+					{allTransactions &&
+						allTransactions.map((txn, index) => (
+							<tr
+								className=" border-b border-[#AC9D57]  hover:bg-[#ddd6c16c] "
+								key={txn.transactionTraceId}
+							>
+								<td className="px-6 py-4">{index + 1}</td>
+								<th
+									scope="row"
+									className="px-6 py-4 font-medium text-[#333333] whitespace-nowrap "
+								>
+									{txn.transactionTraceId}
+								</th>
+								<td className="px-6 py-4">
+									{txn.counterparty ? (
+										txn.counterparty
+									) : (
+										<span className="uppercase text-blue-900">pending</span>
+									)}
+								</td>
+								<td className="px-6 py-4">
+									{txn.code ? (
+										txn.code
+									) : (
+										<span className="uppercase text-blue-900">pending</span>
+									)}
+								</td>
+								<td className="px-6 py-4">{txn.totalAmount}</td>
+								<td
+									className={`px-6 py-4 ${
+										txn.type === "debit" ? `text-[#f25a55]` : `text-green-500`
+									} uppercase`}
+								>
+									{txn.type}
+								</td>
+							</tr>
+						))}
+				</tbody>
+			</table>
+		</div>
+	);
 }
 
 export default Table;
