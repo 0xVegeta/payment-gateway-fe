@@ -5,7 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
-import WalletIcon from "../Icons/WalletIcon";
+import WalletIcon from "../icons/WalletIcon";
 import SignOutIcon from "../icons/SignOutIcon";
 import Navbar from "../components/Navbar";
 import OrganisationIcon from "../icons/OrganisationIcon";
@@ -167,7 +167,11 @@ function DashboardPage() {
 			</div>
 			<div className="w-4/5 bg-[#FDF6E3] mx-auto flex flex-col align-middle text-center justify-center h-screen p-4">
 				<Navbar />
-				{organisation ? <Table currWallet={currWallet} /> : "Loading..."}
+				{organisation ? (
+					<Table currWallet={currWallet} />
+				) : (
+					"Loading..."
+				)}
 			</div>
 			<ToastContainer />
 		</div>
