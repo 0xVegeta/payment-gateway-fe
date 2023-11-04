@@ -31,10 +31,10 @@ function SignInPage() {
       };
 
       const { data } = await axios.post(
-        "/api/v1/org/login",
-        { email, password },
-        config
-      );
+				`${import.meta.env.VITE_URL}/api/v1/org/login`,
+				{ email, password },
+				config
+			);
 
       toast.success("Login Successful");
       localStorage.setItem("orgInfo", JSON.stringify(data));

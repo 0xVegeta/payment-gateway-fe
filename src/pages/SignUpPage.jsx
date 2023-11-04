@@ -46,10 +46,10 @@ function SignUpPage() {
       };
 
       const { data } = await axios.post(
-        "/api/v1/org/register",
-        { organization: organisationName, email, password, category },
-        config
-      );
+				`${import.meta.env.VITE_URL}/api/v1/org/register`,
+				{ organization: organisationName, email, password, category },
+				config
+			);
 
       toast.success("Registration Successful");
       localStorage.setItem("orgInfo", JSON.stringify(data));

@@ -40,7 +40,11 @@ function DashboardPage() {
 				},
 			};
 
-			const { data } = await axios.post("/api/v1/wallets", {}, config);
+			const { data } = await axios.post(
+				`${import.meta.env.VITE_URL}/api/v1/wallets`,
+				{},
+				config
+			);
 
 			toast.success("Wallet added Successfully");
 

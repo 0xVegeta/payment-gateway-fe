@@ -5,7 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
-import WalletIcon from "../Icons/WalletIcon";
+import WalletIcon from "../icons/WalletIcon";
 import SignOutIcon from "../icons/SignOutIcon";
 import Navbar from "../components/Navbar";
 import OrganisationIcon from "../icons/OrganisationIcon";
@@ -40,7 +40,11 @@ function Demo() {
 				},
 			};
 
-			const { data } = await axios.post("/api/v1/wallets", {}, config);
+			const { data } = await axios.post(
+				`${import.meta.env.VITE_URL}/api/v1/wallets`,
+				{},
+				config
+			);
 
 			toast.success("Wallet added Successfully");
 

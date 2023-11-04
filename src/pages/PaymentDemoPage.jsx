@@ -34,7 +34,7 @@ function PaymentDemoPage() {
 			};
 
 			const { data } = await axios.post(
-				`/api/v1/txn/accept-payment/${txnTraceId}`,
+				`${import.meta.env.VITE_URL}/api/v1/txn/accept-payment/${txnTraceId}`,
 				{
 					fromWalletCode: walletId,
 					totalAmount: Number(sessionData.totalAmount),

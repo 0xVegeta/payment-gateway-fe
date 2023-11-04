@@ -22,7 +22,9 @@ function DemoPage() {
 			};
 
 			const { data } = await axios.post(
-				`/api/v1/txn/payment-session/${organisation?.walletCode[0]}`,
+				`${import.meta.env.URL}/api/v1/txn/payment-session/${
+					organisation?.walletCode[0]
+				}`,
 				{
 					amount: amount,
 				},
